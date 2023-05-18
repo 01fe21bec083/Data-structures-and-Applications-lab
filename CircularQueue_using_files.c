@@ -22,12 +22,16 @@ int main()
     q=&sk;
     q->front=-1;
     q->rear=-1;
-    int op,x,h;
+    int op,x,h,n,y,j;
+    printf("Enter the number\n");
+    scanf("%d",&n);
+    printf("Enter the range of random numbers\n");
+    scanf("%d %d",&j,&y);
     FILE  *fp1=fopen("rNoQueue2.txt","w");
 
-    for(int i=0;i<10;i++)
+    for(int i=0;i<n;i++)
     {
-        item=rand()%100;
+        item=rand()%(y-j);
         fprintf(fp1,"%d ",item);
     }
     fclose(fp1);
@@ -36,7 +40,7 @@ int main()
     while(1)
     {
         printf("Enter the option\n");
-        printf("1:Enqueue\n 2: Dequeue\n 3:display\n");
+        printf("1:Enqueue\n 2: Dequeue\n 3:display\ 4: update queue file\n");
         scanf("%d",&op);
         operdis(op);
         switch(op)
@@ -49,6 +53,8 @@ int main()
                 Dequeued(h);
                 break;
              case 3:display(q);
+             break;
+            case 4: update(q);
              break;
         }
     }
@@ -139,3 +145,21 @@ void display(struct Queue *q)
 
     }
 }
+void queueFile(int x)
+{
+    FILE *fp=fopen("Queuefile.txt","a");
+    fprintf(fp,"%d ",x);
+    fclose(fp);
+}
+
+void update(k *q)
+{
+    int i;
+    i=q->front;
+        while(i<=q->rear)
+        {
+           queueFile(q->data[i]);
+            i=(i+1)%size;
+        }
+}
+
