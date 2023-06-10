@@ -10,6 +10,7 @@ typedef struct Node
 
 node root,newnode,head,temp;
 node InsertNode(node ,node);
+node getnode(node);
 int main()
 {
     int n;
