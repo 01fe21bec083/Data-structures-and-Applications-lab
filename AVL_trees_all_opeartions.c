@@ -121,7 +121,37 @@ node deleteNode(node root, int key)
         root->left = deleteNode(root->left, temp->data);
    }
     root->height=Nodeheight(root);
-    root=balancecheck(root);
+    if(BalanceFactor(root)>1 && BalanceFactor(root->left)>=0)
+
+      {
+
+          root=LLRotation(root);
+
+      }
+
+    else if(BalanceFactor(root)>1 && BalanceFactor(root->left)<0)
+
+    {
+
+        root=LRRotation(root);
+
+    }
+
+    else if(BalanceFactor(root)<-1 && BalanceFactor(root->right)<=0)
+
+    {
+
+       root=RRRotation(root);
+
+    }
+
+    else if(BalanceFactor(root)<-1 && BalanceFactor(root->right)>0)
+
+    {
+
+       root=RLRotation(root);
+
+    }
     return root;
 }
 
@@ -228,19 +258,19 @@ node RLRotation(node p)
 //function for checking if it is LL,LR,RR&RL imbalance or not
 node balanceCheck(node p)
 {
-     if(BalanceFactor(p)>1 && BalanceFactor(p->left)>=0)
+     if(BalanceFactor(p)==2 && BalanceFactor(p->left)==1)
       {
           p=LLRotation(p);
       }
-    else if(BalanceFactor(p)>1 && BalanceFactor(p->left)<=0)
+    else if(BalanceFactor(p)==2 && BalanceFactor(p->left)==-1)
     {
         p=LRRotation(p);
     }
-    else if(BalanceFactor(p)<-1 && BalanceFactor(p->right)<0)
+    else if(BalanceFactor(p)==-2 && BalanceFactor(p->right)==-1)
     {
        p=RRRotation(p);
     }
-    else if(BalanceFactor(p)<-1 && BalanceFactor(p->right)>0)
+    else if(BalanceFactor(p)==-2 && BalanceFactor(p->right)==1)
     {
        p=RLRotation(p);
     }
