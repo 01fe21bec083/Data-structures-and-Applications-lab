@@ -120,6 +120,9 @@ node deleteNode(node root, int key)
         root->data = temp->data;
         root->left = deleteNode(root->left, temp->data);
    }
+    root->height=Nodeheight(root);
+    root=balancecheck(root);
+    return root;
 }
 
 //function for preorder traversal
@@ -225,19 +228,19 @@ node RLRotation(node p)
 //function for checking if it is LL,LR,RR&RL imbalance or not
 node balanceCheck(node p)
 {
-     if(BalanceFactor(p)==2 && BalanceFactor(p->left)==1)
+     if(BalanceFactor(p)>1 && BalanceFactor(p->left)>=0)
       {
           p=LLRotation(p);
       }
-    else if(BalanceFactor(p)==2 && BalanceFactor(p->left)==-1)
+    else if(BalanceFactor(p)>1 && BalanceFactor(p->left)<=0)
     {
         p=LRRotation(p);
     }
-    else if(BalanceFactor(p)==-2 && BalanceFactor(p->right)==-1)
+    else if(BalanceFactor(p)<-1 && BalanceFactor(p->right)<0)
     {
        p=RRRotation(p);
     }
-    else if(BalanceFactor(p)==-2 && BalanceFactor(p->right)==1)
+    else if(BalanceFactor(p)<-1 && BalanceFactor(p->right)>0)
     {
        p=RLRotation(p);
     }
