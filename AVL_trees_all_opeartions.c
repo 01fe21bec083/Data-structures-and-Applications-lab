@@ -120,7 +120,7 @@ node deleteNode(node root, int key)
         root->data = temp->data;
         root->left = deleteNode(root->left, temp->data);
    }
-    root->height=Nodeheight(root);
+    root->height=NodeHeight(root);
     if(BalanceFactor(root)>1 && BalanceFactor(root->left)>=0)
 
       {
