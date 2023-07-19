@@ -13,13 +13,13 @@ int search(int H[], int key) {
     int index = hash(key);
     int i = 0;
 
-    while (H[(index + i * primeHash(index)) % SIZE] != key) {
+    while (H[(index + i * primeHash(key)) % SIZE] != key) {
         i++;
-        if (H[(index + i * primeHash(index)) % SIZE] == 0)
+        if (H[(index + i * primeHash(key)) % SIZE] == 0)
             return -1;
     }
 
-    return (index + i * primeHash(index)) % SIZE;
+    return (index + i * primeHash(key)) % SIZE;
 }
 
 int hash(int key) {
@@ -48,18 +48,17 @@ int nearestPrime() {
 }
 
 int primeHash(int key) {
-    return nearestPrime() - (key % SIZE);
+    return nearestPrime() - (key % nearestPrime());
 }
 
 int dhash(int H[], int key) {
     int index = hash(key);
     int i = 0;
 
-    while (H[(index + i * primeHash(index)) % SIZE] != 0) {
+    while (H[(index + i * primeHash(key)) % SIZE] != 0) {
         i++;
     }
-
-    return (index + i * primeHash(index)) % SIZE;
+    return (index + i * primeHash(key)) % SIZE;
 }
 
 void insert(int H[], int key) {
